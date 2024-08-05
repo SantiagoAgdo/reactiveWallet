@@ -1,6 +1,6 @@
-# Servicio de Billetera Digital
+# Wallet 
 
-Este proyecto está enfocado en demostrar el uso de programación reactiva con Java Spring WebFlux. Se integra específicamente con AWS DynamoDB como la única conexión AWS necesaria. El proyecto no incluye roles, autenticación de usuarios u otras características fuera del alcance de la validación de la programación reactiva con WebFlux.
+El proyecto está enfocado en demostrar el uso de programación reactiva con Java Spring WebFlux. Se integra específicamente con AWS DynamoDB como la única conexión AWS necesaria. El proyecto no incluye roles, autenticación de usuarios u otras características fuera del alcance de la validación de la programación reactiva con WebFlux.
 
 ## Características
 
@@ -23,24 +23,31 @@ Este proyecto está enfocado en demostrar el uso de programación reactiva con J
 #### Ejemplo con cURL
 
 ```sh
-curl --location --request GET 'http://localhost:8080/wallet/balance?documento=1000123456&numeroCelular=30012345678' \
+curl --location 'http://localhost:8080/wallet/balance?documento=1000123456&numeroCelular=30012345678' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic dXNlcjpwYXNzd29yZA==' \
---data '{
-    "cardNumber": "1234567890123456",
-    "amount": 100.00,
-    "status": "PENDING",
-    "transactionType": "PURCHASE"
-}'
+--header 'Authorization: Basic dXNlcjpwYXNzd29yZA=='
+```
+----
+```
+Succes Response
+{
+    "saldo": 10000
+}
+```
+```
+Error Repsonse
+{
+    "codeError": "001",
+    "msmError": "Datos no Coinciden"
+}
 ```
 
 ### Tabla DynamoDB
 Nombre de la Tabla: Wallet
 Datos de Ejemplo:
 json
-Copiar código
 
-```sh
+```
 {
   "id": "1",
   "documento": "1000123456",
